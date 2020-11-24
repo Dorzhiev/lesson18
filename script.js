@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', function(){
                         clearInterval(updateClockInterval);
                         timerHours.textContent="00";
                         timerMinutes.textContent="00";
-                        timerSeconds.textContent="00";
+                    timerSeconds.textContent="00";
                     }  
                 
             }
