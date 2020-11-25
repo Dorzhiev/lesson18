@@ -14,23 +14,33 @@ let second = myDate.getSeconds();
     if (second < 10) {
     second = "0" + second;
     }
-    if (hour < 12) {
-    welcome = "Доброе утро";
-        } else if (hour < 17) {
-    welcome = "Добрый день";
-    } else {
-    welcome = "вечер в хату";
+    if (hour > 23 && hour < 5) {
+    console.log(hour);
+        welcome = "доброй ночи";
+    } else if (hour > 5 && hour < 12) {
+        welcome = "доброе утро";
+    } else if (hour > 12 && hour < 17) {
+         welcome = "добрый день";
+    }  else {
+        welcome = "вечер в хату";
     }
+
 welcome1.textContent = welcome;
 
 const hours = document.querySelector('#hours');
-hours.textContent = "текущее время: " + hour;
+hours.textContent = "Текущее вермя: " + hour;
 
 const minutes = document.querySelector('#minute');
 minutes.textContent = minute;
 
 const seconds = document.querySelector('#second');
-seconds.textContent = second;
+    if (hour > 12 && hour < 24) {
+        seconds.textContent = second + " PM";
+    } else {
+        seconds.textContent = second + " AM";
+    }
+
+
 
 const date = document.querySelector('#day');
 const realDate = new Date();
