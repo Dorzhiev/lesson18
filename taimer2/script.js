@@ -14,18 +14,18 @@ let second = myDate.getSeconds();
     if (second < 10) {
     second = "0" + second;
     }
-    if (hour > 23 && hour < 5) {
-    console.log(hour);
+    if (hour >= 24 && hour < 6) {
         welcome = "доброй ночи";
-    } else if (hour > 5 && hour < 12) {
+    } else if (hour >= 6 && hour < 12) {
         welcome = "доброе утро";
-    } else if (hour > 12 && hour < 17) {
+    } else if (hour >= 12 && hour < 18) {
          welcome = "добрый день";
-    }  else {
+    }  else if  (hour >= 18 && hour < 24) {
         welcome = "вечер в хату";
     }
 
 welcome1.textContent = welcome;
+
 
 const hours = document.querySelector('#hours');
 hours.textContent = "Текущее вермя: " + hour;
@@ -76,7 +76,6 @@ function countTimer(deadline){
     countTimer('31 december 2020');
 }
 setInterval(showTime, 1000);
-
 
 
 
