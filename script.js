@@ -1,18 +1,5 @@
 
 
-
-//  let date = new Date();
-// console.log(date.toISOString().substr(0, 10));
-
-// console.log('год ' + date.getFullYear());
-// console.log('месяц ' +( date.getMonth() + 1));
-// console.log('День месяца ' + date.getDate());
-// console.log('День недели ' + date.getDay());
-// console.log('час ' + date.getHours());
-// console.log('минуты ' + date.getMinutes());
-// console.log('секунды ' + date.getSeconds());
-// console.log('Миллисекунды ' + date.getMilliseconds());
-
 window.addEventListener('DOMContentLoaded', function(){
     'use strict';
 
@@ -45,7 +32,7 @@ window.addEventListener('DOMContentLoaded', function(){
                         clearInterval(updateClockInterval);
                         timerHours.textContent="00";
                         timerMinutes.textContent="00";
-                    timerSeconds.textContent="00";
+                        timerSeconds.textContent="00";
                     }  
                 
             }
@@ -53,8 +40,71 @@ window.addEventListener('DOMContentLoaded', function(){
             updateClock();
     }
 
-    countTimer('24 november 2020');
+    countTimer('26 november 2020');
 });
 
+const toggleMenu = () =>{
+    const btnMenu = document.querySelector('.menu'),
+        menu = document.querySelector('menu'),
+        closeBtn = document.querySelector('.close-btn'),
+        menuItems = menu.querySelectorAll('ul>li');
+    
+    const handlerMenu = () => {
 
+        menu.classList.toggle('active-menu');
 
+        // if(!menu.style.transform || menu.style.transform === `translate(-100%)`){
+        //     menu.style.transform = `translate(0)`;
+        // } else {
+        //     menu.style.transform = `translate(-100%)`;
+        // }
+    };
+
+    btnMenu.addEventListener('click', handlerMenu);
+    closeBtn.addEventListener('click', handlerMenu);
+
+    menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+};
+toggleMenu();
+
+// popup
+
+const togglePopUp = () => {
+    const popup = document.querySelector('.popup'),
+    popupBtn = document.querySelectorAll('.popup-btn'),
+    popUpClose = document.querySelector('.popup-close');
+
+    popupBtn.forEach((elem) => {
+        elem.addEventListener('click', () => {
+            popup.style.display = 'block';
+        });
+    });
+
+    popUpClose.addEventListener('click', () => {
+        popup.style.display = 'none';
+    })
+};
+togglePopUp();
+
+//табы
+
+const tabs = () => {
+    const tabHeader = document.querySelector('.service-header'),
+    tab = tabHeader.querySelector('.service-header-tab'),
+    tabContent = document.querySelector('.service-tab');
+    // document.querySelector('.popup-content').style.opacity="0.5";
+};
+tabs();
+
+let popup = document.querySelector('.popup-content'),
+count = 0;
+
+let opacityPopup = function(){
+	count++;
+	popup.style.opacity = count +'%';
+	if(count < 100) {
+		setTimeout(opacityPopup, 50);
+	}
+	
+};
+opacityPopup();
