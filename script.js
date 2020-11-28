@@ -70,9 +70,9 @@ toggleMenu();
 // popup
 
 const togglePopUp = () => {
-    const popup = document.querySelector('.popup'),
-    popupBtn = document.querySelectorAll('.popup-btn'),
-    popUpClose = document.querySelector('.popup-close');
+    const popupBtn = document.querySelectorAll('.popup-btn'),
+    popup = document.querySelector('.popup');
+
 
     popupBtn.forEach((elem) => {
         elem.addEventListener('click', () => {
@@ -80,31 +80,51 @@ const togglePopUp = () => {
         });
     });
 
-    popUpClose.addEventListener('click', () => {
-        popup.style.display = 'none';
-    })
+    popup.addEventListener('click', (event)=>{
+        let target = event.target;
+
+        if(target.classList.contains('popup-close')){
+             popup.style.display = 'none';
+        } else {
+            target = target.closest('.popup-content');
+        if(!target){
+            popup.style.display = 'none';
+        }    
+      }
+    });
 };
 togglePopUp();
 
-//табы
+let popupContent = document.querySelector('.popup-content'),
+    popUp = document.querySelector('.popup'),
+    popupBtn = document.querySelectorAll('.popup-btn'),
+    count = 0;
 
-const tabs = () => {
-    const tabHeader = document.querySelector('.service-header'),
-    tab = tabHeader.querySelector('.service-header-tab'),
-    tabContent = document.querySelector('.service-tab');
-    // document.querySelector('.popup-content').style.opacity="0.5";
+const opacityPopup = () => {
+    popUp.style.display = 'block'; // показать попап
+    if (screen.width > 768) { // если ширина экрана больше заданного числа, то запустить анимацию
+        let start = Date.now(); // получить стартовое время анимации (в момент клика)
+        let timer = setInterval(() => {
+            let timePassed = Date.now() - start; // запуск таймера, отнять от текущего реального времени стартовое время, после клика
+            if (timePassed >= 800) {
+                clearInterval(timer); // если время достигло определенного числа удалить setInterval 
+                return;
+            }
+            draw(timePassed); // отрисовка анимации 
+        });
+        let draw = (timePassed) => {
+            let wContent = +getComputedStyle(popupContent).width.split('px')[0]; // получить стили попап контента (блок с самой формой, а не вся обёртка, с попап )
+            wContent = -wContent / 2 + 50 + 'px'; // данные для центрирования по горизонтали
+            popupContent.style.left = timePassed / 16 + '%'; // центрирование по горизонтали
+            popupContent.style.marginLeft = wContent; // центрирование по горизонтали
+        };
+    }
 };
-tabs();
 
-let popup = document.querySelector('.popup-content'),
-count = 0;
+ popupBtn.forEach((elem) => {
+        elem.addEventListener('click', () => {
+             opacityPopup();
+        });
+    });
 
-let opacityPopup = function(){
-	count++;
-	popup.style.opacity = count +'%';
-	if(count < 100) {
-		setTimeout(opacityPopup, 50);
-	}
-	
-};
-opacityPopup();
+
