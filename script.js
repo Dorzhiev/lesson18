@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', function(){
             updateClock();
     }
 
-    countTimer('26 november 2020');
+    countTimer('30 november 2020');
 });
 
 const toggleMenu = () =>{
@@ -48,21 +48,23 @@ const toggleMenu = () =>{
         menu = document.querySelector('menu'),
         closeBtn = document.querySelector('.close-btn'),
         menuItems = menu.querySelectorAll('ul>li');
+ 
     
     const handlerMenu = () => {
-
         menu.classList.toggle('active-menu');
-
-        // if(!menu.style.transform || menu.style.transform === `translate(-100%)`){
-        //     menu.style.transform = `translate(0)`;
-        // } else {
-        //     menu.style.transform = `translate(-100%)`;
-        // }
     };
 
-    btnMenu.addEventListener('click', handlerMenu);
-    closeBtn.addEventListener('click', handlerMenu);
+    // btnMenu.addEventListener('click', handlerMenu);
+    // closeBtn.addEventListener('click', handlerMenu);
+    btnMenu.addEventListener('click', (event) => {
+         if(!event.target.matches('menu') || !event.target.matches('.close-btn')){
+            handlerMenu();
+            console.log(event.target);
+            return;
+         }
 
+    });
+    
     menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
 };
 toggleMenu();
@@ -128,3 +130,35 @@ const opacityPopup = () => {
     });
 
 
+//табы
+
+const tabs = () => {
+    const tabHeader = document.querySelector('.service-header'),
+    tab = tabHeader.querySelectorAll('.service-header-tab'),
+    tabContent = document.querySelectorAll('.service-tab');
+
+const toggleTabContent = (index) => {
+    for(let i = 0; i < tabContent.length; i++){
+        if (index === i){
+            tab[i].classList.add('active');
+            tabContent[i].classList.remove('d-none');
+        } else {
+            tab[i].classList.remove('active');
+            tabContent[i].classList.add('d-none');
+        }
+    }
+};
+    tabHeader.addEventListener('click', (event) => {
+        let target = event.target;
+            target = target.closest('.service-header-tab');
+        if (target){
+            tab.forEach((item, i) => {
+                if(item === target){
+                    toggleTabContent(i);
+                }
+            });
+        }
+    });
+
+};
+tabs();
