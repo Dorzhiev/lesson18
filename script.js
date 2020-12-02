@@ -165,7 +165,6 @@ tabs();
 const slider = () => {
     const slide = document.querySelectorAll('.portfolio-item'),
         btn = document.querySelectorAll('.portfolio-btn'),
-        dot = document.querySelectorAll('.dot'),
         slider = document.querySelector('.portfolio-content'),
         portfolioDots = document.querySelector('.portfolio-dots');
 
@@ -181,6 +180,7 @@ const slider = () => {
             portfolioDots.append(li);
     });
     
+    const dot = document.querySelectorAll('.dot');
 
     const prevSlide = (elem, index, strClass) => {
         elem[index].classList.remove(strClass);
