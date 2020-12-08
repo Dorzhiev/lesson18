@@ -1,4 +1,5 @@
 {
     "editor.fontLigatures": null,
-    "editor.fontWeight": null
+    "editor.fontWeight": null,
+    "liveServer.settings.port": 5501
 }

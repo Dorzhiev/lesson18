@@ -258,3 +258,41 @@ const slider = () => {
 };
 
 slider();
+
+/// Наша команда 
+
+const command = document.querySelector('.command');
+
+const toggleImg = event => {
+    const target = event.target; 
+
+    if (target.matches('img')) {
+        let imgSrc = target.src,
+        dataSetImg = target.dataset.img;
+
+        // меняем местами значения
+
+        target.dataset.img = imgSrc;
+        target.src = dataSetImg;
+    }
+}
+
+command.addEventListener('mouseover', toggleImg); 
+command.addEventListener('mouseout', toggleImg);
+
+
+
+////калькулятор
+
+const calcBlock  = document.querySelector('.calc-block');
+
+// calcBlock.addEventListener('input', () => {
+//    target.matches('input') = console.log();//input.value.replace(/\D/g, '');
+// });
+calcBlock.addEventListener('input', (event) => {
+	const target = event.target;
+    // input.value = input.value.replace(/\D/g, '');
+    if (target.matches('input')) {
+      console.log(target.value.replace(/\D/g, '')); 
+    }
+});
