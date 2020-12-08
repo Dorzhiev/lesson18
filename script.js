@@ -286,13 +286,10 @@ command.addEventListener('mouseout', toggleImg);
 
 const calcBlock  = document.querySelector('.calc-block');
 
-// calcBlock.addEventListener('input', () => {
-//    target.matches('input') = console.log();//input.value.replace(/\D/g, '');
-// });
 calcBlock.addEventListener('input', (event) => {
 	const target = event.target;
-    // input.value = input.value.replace(/\D/g, '');
+    
     if (target.matches('input')) {
-      console.log(target.value.replace(/\D/g, '')); 
+      target.value = target.value.replace(/\D/g, ''); 
     }
 });
