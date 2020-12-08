@@ -340,3 +340,64 @@ const calc = (price = 100) => {
     
 }
 calc(100);
+
+
+/////send-ajax-form
+
+const sendForm = () => {
+    const errorMessage = 'что то пошло не так..',
+        loadMessage = 'Загрузка',
+        successMesage = 'Спасибо! Мы скоро с вами свяжемся';
+    const form = document.getElementById('form1');
+
+    const statusMessage = document.createElement('div');
+    statusMessage.textContent = 'тут будет сообщение!';
+    statusMessage.style.cssText = 'font-size: 2rem;'
+   
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        form.appendChild(statusMessage);
+        const formData = new FormData(form);
+        let body = {};
+
+        // for (let val of formData.entries()){
+        //     // console.log(val);
+        //     body[val[0]] = val[1]
+        // }
+
+        formData.forEach((val, key) => {
+            body[key] = val;
+        });
+        postData(body, 
+            () => {
+                statusMessage.textContent = successMesage;
+
+        }, (error) => {
+            statusMessage.textContent = errorMessage;
+            console.error(error);
+        });
+    });
+
+    const postData = (body, outputData, errorData) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', () => {
+            
+            if (request.readyState !== 4) {
+                return;
+            }
+            if (request.status === 200) {
+                
+            } else {
+                erroreData(); 
+            }
+        });
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+        
+        console.log(body);
+
+        request.send(JSON.stringify(body));
+    }
+
+}
+sendForm();
