@@ -348,7 +348,12 @@ const sendForm = () => {
     const errorMessage = 'что то пошло не так..',
         loadMessage = 'Загрузка',
         successMesage = 'Спасибо! Мы скоро с вами свяжемся';
-    const form = document.getElementById('form1');
+    const form = document.querySelectorAll('form');
+    const form = ['form1', 'form2', 'form3'];
+    form.forEach(function()=>{
+    form[i];
+    })
+
 
     const statusMessage = document.createElement('div');
     statusMessage.textContent = 'тут будет сообщение!';
