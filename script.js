@@ -348,22 +348,18 @@ const sendForm = () => {
     const errorMessage = 'что то пошло не так..',
         loadMessage = 'Загрузка',
         successMesage = 'Спасибо! Мы скоро с вами свяжемся';
-    const form = document.querySelectorAll('form');
-    const form = ['form1', 'form2', 'form3'];
-    form.forEach(function()=>{
-    form[i];
-    })
 
+    const form = document.querySelectorAll('form');
 
     const statusMessage = document.createElement('div');
     statusMessage.textContent = 'тут будет сообщение!';
     statusMessage.style.cssText = 'font-size: 2rem;'
    
-    form.addEventListener('submit', (event) => {
+        form.forEach(item => item.addEventListener('submit', (event) => {
         event.preventDefault();
-        form.appendChild(statusMessage);
+        item.appendChild(statusMessage); // добавляем к определенной форме сообщение
         statusMessage.textContent = loadMessage;
-        const formData = new FormData(form);
+        const formData = new FormData(item); // записываем данные с определенной формы
         let body = {};
         formData.forEach((val, key) => {
             body[key] = val;
@@ -374,7 +370,7 @@ const sendForm = () => {
             statusMessage.textContent = errorMessage;
             console.error(error);
         });
-    });
+    }));
 
     const postData = (body, outputData, errorData) => {
         const request = new XMLHttpRequest();
