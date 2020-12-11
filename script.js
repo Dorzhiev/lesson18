@@ -354,8 +354,9 @@ const sendForm = () => {
     const statusMessage = document.createElement('div');
     statusMessage.textContent = 'тут будет сообщение!';
     statusMessage.style.cssText = 'font-size: 2rem;'
-   
-        form.forEach(item => item.addEventListener('submit', (event) => {
+    statusMessage.style.cssText = 'font-size: 2rem; color: white;'
+
+    form.forEach(item => item.addEventListener('submit', (event) => {
         event.preventDefault();
         item.appendChild(statusMessage); // добавляем к определенной форме сообщение
         statusMessage.textContent = loadMessage;
@@ -366,11 +367,34 @@ const sendForm = () => {
         });
         postData(body, () => {
             statusMessage.textContent = successMesage;
+            setTimeout(() => {
+                statusMessage.textContent = '';
+                [...document.querySelectorAll('input')].forEach(item => item.value = '');
+            }, 3000);
         }, (error) => {
             statusMessage.textContent = errorMessage;
+            setTimeout(() => {
+                statusMessage.textContent = '';
+                [...document.querySelectorAll('input')].forEach(item => item.value = '');
+            }, 3000);
             console.error(error);
         });
     }));
+//////////////////////////////////////////
+    const formPhone = document.querySelectorAll('.form-phone');
+    forEach(() => {
+        input = formPhone.addEventListener('input', (event) => {
+    const target = event.target;
+    
+    if (target.matches('input')) {
+    target.value = target.value.replace(/\D/g, ''); 
+   }
+});
+    });
+///////////////////////////////////////////
+
+
+
 
     const postData = (body, outputData, errorData) => {
         const request = new XMLHttpRequest();
