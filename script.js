@@ -362,6 +362,7 @@ const sendForm = () => {
         statusMessage.textContent = loadMessage;
         const formData = new FormData(item); // записываем данные с определенной формы
         let body = {};
+
         formData.forEach((val, key) => {
             body[key] = val;
         });
@@ -380,21 +381,6 @@ const sendForm = () => {
             console.error(error);
         });
     }));
-//////////////////////////////////////////
-    const formPhone = document.querySelectorAll('.form-phone');
-    forEach(() => {
-        input = formPhone.addEventListener('input', (event) => {
-    const target = event.target;
-    
-    if (target.matches('input')) {
-    target.value = target.value.replace(/\D/g, ''); 
-   }
-});
-    });
-///////////////////////////////////////////
-
-
-
 
     const postData = (body, outputData, errorData) => {
         const request = new XMLHttpRequest();
@@ -413,5 +399,30 @@ const sendForm = () => {
         request.send(JSON.stringify(body));
     }
 
+    const formPhone = document.querySelectorAll('.form-phone');
+    formPhone.forEach((item) => {
+        item.addEventListener('input', (event) => {
+            const target = event.target;
+            if (target.matches('input')) {
+                target.value = target.value.replace(/(?!^\+)\D/g, '');
+            }
+        });
+    });
+
+    const formName = document.querySelectorAll('.form-name');
+    formName.forEach((item) => {
+        item.addEventListener('input', (event) => {
+            const target = event.target;
+            if (target.matches('input')) {
+                target.value = target.value.replace(/(?![а-яА-Я])\D|[0-9]/g, '');
+            }
+        });
+    });
+    const formMessage = document.querySelector('.mess');
+    formMessage.addEventListener('input', (event) => {
+        const target = event.target;
+        target.value = target.value.replace(/[^а-яА-Я\s\,\.\?\!\-\;\:]/g, '');
+
+    });
 }
 sendForm();
