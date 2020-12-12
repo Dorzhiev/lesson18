@@ -348,13 +348,14 @@ const sendForm = () => {
     const errorMessage = 'что то пошло не так..',
         loadMessage = 'Загрузка',
         successMesage = 'Спасибо! Мы скоро с вами свяжемся';
-
     const form = document.querySelectorAll('form');
 
     const statusMessage = document.createElement('div');
     statusMessage.textContent = 'тут будет сообщение!';
     statusMessage.style.cssText = 'font-size: 2rem;'
     statusMessage.style.cssText = 'font-size: 2rem; color: white;'
+
+
 
     form.forEach(item => item.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -382,22 +383,25 @@ const sendForm = () => {
         });
     }));
 
-    const postData = (body, outputData, errorData) => {
-        const request = new XMLHttpRequest();
+    const postData = (body) => {
+
+         return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
         request.addEventListener('readystatechange', () => {
             if (request.readyState !== 4) {
                 return;
             }
             if (request.status === 200) {
-                outputData();
+                resolve(response);
             } else {
-                erroreData(request.status); 
+                reject(request.status); 
             }
         });
         request.open('POST', './server.php');
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(JSON.stringify(body));
-    }
+    });
+        
 
     const formPhone = document.querySelectorAll('.form-phone');
     formPhone.forEach((item) => {
@@ -425,4 +429,6 @@ const sendForm = () => {
 
     });
 }
-sendForm();
+sendForm()
+    .then()
+    .cathc(error => console.error(error));
