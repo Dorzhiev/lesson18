@@ -364,16 +364,13 @@ const sendForm = () => {
         const formData = new FormData(item); // записываем данные с определенной формы
         let body = {};
 
-        formData.forEach((val, key) => {
-            body[key] = val;
-        });
-        postData(body, () => {
-            statusMessage.textContent = successMesage;
+        postData(body).then(() => {
+  statusMessage.textContent = successMesage;
             setTimeout(() => {
                 statusMessage.textContent = '';
                 [...document.querySelectorAll('input')].forEach(item => item.value = '');
             }, 3000);
-        }, (error) => {
+}, (error) => {
             statusMessage.textContent = errorMessage;
             setTimeout(() => {
                 statusMessage.textContent = '';
@@ -392,7 +389,7 @@ const sendForm = () => {
                 return;
             }
             if (request.status === 200) {
-                resolve(response);
+                resolve();
             } else {
                 reject(request.status); 
             }
@@ -401,8 +398,7 @@ const sendForm = () => {
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(JSON.stringify(body));
     });
-        
-
+  };
     const formPhone = document.querySelectorAll('.form-phone');
     formPhone.forEach((item) => {
         item.addEventListener('input', (event) => {
@@ -429,6 +425,4 @@ const sendForm = () => {
 
     });
 }
-sendForm()
-    .then()
-    .cathc(error => console.error(error));
+sendForm();
