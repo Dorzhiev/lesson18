@@ -363,9 +363,12 @@ const sendForm = () => {
         statusMessage.textContent = loadMessage;
         const formData = new FormData(item); // записываем данные с определенной формы
         let body = {};
+        formData.forEach((val, key) => {
+            body[key] = val;
+        });
 
         postData(body).then(() => {
-  statusMessage.textContent = successMesage;
+            statusMessage.textContent = successMesage;
             setTimeout(() => {
                 statusMessage.textContent = '';
                 [...document.querySelectorAll('input')].forEach(item => item.value = '');
@@ -426,3 +429,4 @@ const sendForm = () => {
     });
 }
 sendForm();
+    
