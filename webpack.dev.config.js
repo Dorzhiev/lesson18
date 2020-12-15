@@ -9,7 +9,7 @@ module.exports = {
     mode: 'development',
     devServer: {
         open: true,
-        port: 8080,
+        port: 5501,
         hot: true,
         writeToDisk: true,
     },

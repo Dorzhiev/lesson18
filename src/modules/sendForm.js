@@ -26,15 +26,18 @@ const sendForm = () => {
                 if(response.status !== 200){
                     throw new Error('status network not 200');
                 }
-                console.log(response)
                 statusMessage.textContent = successMesage;
                 setTimeout(() => {
+                const popup = document.querySelector('.popup');
+                popup.style.display = 'none';
                 statusMessage.textContent = '';
                 [...document.querySelectorAll('input')].forEach(item => item.value = '');
             }, 3000);
-}, (error) => {
+    }, (error) => {
             statusMessage.textContent = errorMessage;
             setTimeout(() => {
+                const popup = document.querySelector('.popup');
+                popup.style.display = 'none';
                 statusMessage.textContent = '';
                 [...document.querySelectorAll('input')].forEach(item => item.value = '');
             }, 3000);
