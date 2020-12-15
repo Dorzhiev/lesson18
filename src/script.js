@@ -38,10 +38,12 @@ window.addEventListener('DOMContentLoaded', function(){
             }
             const updateClockInterval = setInterval(updateClock, 1000);
             updateClock();
-    }
+    };
 
-    countTimer('30 november 2020');
-});
+countTimer('16 december 2020');
+
+    
+
 
 const toggleMenu = () =>{
     const btnMenu = document.querySelector('.menu'),
@@ -426,4 +428,5 @@ const sendForm = () => {
     });
 }
 sendForm();
-    
+
+});    
