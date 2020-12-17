@@ -21,27 +21,26 @@ const sendForm = () => {
             body[key] = val;
         });
 
+        // const popup = document.querySelector('.popup');
         postData(body)
             .then((response) => {
-                if(response.status !== 200){
+                if (response.status !== 200) {
                     throw new Error('status network not 200');
                 }
                 statusMessage.textContent = successMesage;
                 setTimeout(() => {
-                const popup = document.querySelector('.popup');
-                popup.style.display = 'none';
-                statusMessage.textContent = '';
-                [...document.querySelectorAll('input')].forEach(item => item.value = '');
-            }, 3000);
-    }, (error) => {
-            statusMessage.textContent = errorMessage;
-            setTimeout(() => {
-                const popup = document.querySelector('.popup');
-                popup.style.display = 'none';
-                statusMessage.textContent = '';
-                [...document.querySelectorAll('input')].forEach(item => item.value = '');
-            }, 3000);
-        });
+                    // popup.style.display = 'none';
+                    statusMessage.textContent = '';
+                    [...document.querySelectorAll('input')].forEach(item => item.value = '');
+                }, 3000);
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                setTimeout(() => {
+                    // popup.style.display = 'none';
+                    statusMessage.textContent = '';
+                    [...document.querySelectorAll('input')].forEach(item => item.value = '');
+                }, 3000);
+            });
     }));
 
     const postData = (body) => {
